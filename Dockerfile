@@ -56,11 +56,3 @@ RUN git clone git://www.github.com/ElmerCSC/elmerfem -b elmerice elmerice \
 	&& make \
 	&& sudo make install #\
 	#&& rm -R /home/elmerice
-
-# Set the path to Elmer exectuables
-#ENV PATH="$PATH:/usr/local/Elmer-devel/bin"
-
-#RUN echo "#Elmer/Ice Exectuable Paths" >> /home/glacier/.bashrc
-#RUN echo "export PATH=$PATH/usr/local/Elmer-devel/bin" >> /home/glacier/.bashrc
-#ENV PATH="$PATH:/usr/local/Elmer-devel/share/elmersolver/lib"
-#RUN echo "export PATH=$PATH/usr/local/Elmer-devel/share/elmersolver/lib" >> /home/glacier/.bashrc
