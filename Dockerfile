@@ -37,15 +37,17 @@ ENV HOME=/home/${USER}
 WORKDIR ${HOME}
 
 # Add vim syntax highlighting
-COPY .vim /home/${USER}/.vim/
+COPY .vim ${HOME}/.vim/
 
 # Clone the ElmerIce source code and make directories needed for compilation
 RUN git clone git://www.github.com/ElmerCSC/elmerfem -b elmerice elmerice \
-	&& mkdir elmerice/builddir \
-	&& cd elmerice/builddir
+	  && mkdir elmerice/builddir
+
+# Move to the builddir
+WORKDIR ${HOME}/elmerice/builddir
 
 # Run cmake with proper flags
-RUN	cmake /home/glacier/elmerice \
+RUN	cmake ${HOME}/elmerice \
 		-DCMAKE_INSTALL_PREFIX=/usr/local/Elmer-devel \
 		-DCMAKE_C_COMPILER=/usr/bin/gcc \
 		-DCMAKE_Fortran_COMPILER=/usr/bin/gfortran \
@@ -56,3 +58,6 @@ RUN	cmake /home/glacier/elmerice \
 
 # compile the source code
 RUN make && sudo make install
+
+# set the working dir to home
+WORKDIR ${HOME}
